@@ -7,8 +7,8 @@ const TwitsContext = createContext();
 
 export const TwitsContextProvider = ({ children }) => {
   const tweetsUrl = "http://localhost:8080/api/tweets";
-
   const [twits, setTwits] = useState([]);
+  const [token] = useLocalStorage("token", null); // useLocalStorage'dan token al
 
   useEffect(() => {
     setTwits(twitData);
@@ -24,8 +24,6 @@ export const TwitsContextProvider = ({ children }) => {
 
   const addComment = async (id, comment) => {
     try {
-      const token = localStorage.getItem("token");
-  
       if (!token) {
         console.warn("Token bulunamadı, işlem iptal edildi.");
         return;
@@ -33,7 +31,7 @@ export const TwitsContextProvider = ({ children }) => {
   
       const newComment = {
         id: Date.now(),
-        user: "guest",
+        user: "frunno",
         content: comment,
       };
   
@@ -46,32 +44,31 @@ export const TwitsContextProvider = ({ children }) => {
       );
   
       const response = await axios.post(
-        tweetsUrl,
-        {
-          tweetId: id,
-          comment: newComment,
-        },
+        `${tweetsUrl}/${id}/comments`, // Endpoint'i düzeltiyoruz
+        { content: comment }, // Sadece yorum içeriğini gönderiyoruz
         {
           headers: {
             Authorization: `Bearer ${token}`,
-          },
+            "Content-Type": "application/json" // Content-Type ekliyoruz
+          }
         }
       );
   
       console.log("Yorum başarıyla gönderildi:", response.data);
     } catch (error) {
-      console.error("Giriş hatası:", error);
+      console.error("Yorum ekleme hatası:", error);
       if (error.response) {
         console.log("Status:", error.response.status);
         console.log("Data:", error.response.data);
-      } else if (error.request) {
-        console.log("No response received");
-      } else {
-        console.log("Error:", error.message);
+        
+        // 401 hatasında kullanıcıyı login sayfasına yönlendir
+        if (error.response.status === 401) {
+          //window.location.href = "/login";
+          console.log("401 hatası aldın");
+        }
       }
     }
   };
-  
 
   return (
     <TwitsContext.Provider value={{ twits, likeTwit, addComment }}>
