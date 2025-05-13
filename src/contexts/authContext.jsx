@@ -7,10 +7,8 @@ const AuthContext=createContext();
 
 export const AuthContextProvider=({children})=>{
 const loginUpbaseUrl = "http://localhost:8080/api/auth/login";
-const signUpbaseUrl =
-  "http://localhost:8080/api/auth/register";
-
-
+const signUpbaseUrl = "http://localhost:8080/api/auth/register";
+ 
 const [isLoggedIn,setIsLoggedIn]=useState(false);
 const[token,setToken]=useLocalStorage("token",null)
 const[kayitDurumu,setkayitDurumu]=useState(false);
@@ -20,6 +18,12 @@ const login = async (data) => {
   try {
     const response = await axios.post(loginUpbaseUrl, data);
     console.log('Giriş başarılı:', response.data);
+
+      const accessToken = response.data.token; // veya accessToken, backend ne döndürüyor kontrol et
+      setToken(accessToken);
+      setIsLoggedIn(true);
+
+
   } catch (error) {
     console.error('Giriş hatası:', error);
     if (error.response) {
