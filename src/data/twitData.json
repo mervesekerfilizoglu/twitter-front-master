@@ -1,0 +1,44 @@
+[
+    {
+      "id": 1,
+      "user": {
+        "username": "johndoe",
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/150?img=3"
+      },
+      "content": "Merhaba dünya! Bu benim ilk twitim.",
+      "likes": 5,
+      "comments": [
+        {
+          "id": 101,
+          "user": "janedoe",
+          "content": "Hoş geldin Twitter'a!"
+        }
+      ],
+      "createdAt": "2025-04-30T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "user": {
+        "username": "techguy",
+        "name": "Tech Guy",
+        "avatar": "https://i.pravatar.cc/150?img=5"
+      },
+      "content": "Yeni framework'ü denediniz mi? Harika!",
+      "likes": 12,
+      "comments": [
+        {
+          "id": 102,
+          "user": "devgirl",
+          "content": "Evet! Dokümantasyonu da oldukça iyi."
+        },
+        {
+          "id": 103,
+          "user": "coderx",
+          "content": "Henüz fırsat bulamadım."
+        }
+      ],
+      "createdAt": "2025-05-01T14:45:00Z"
+    }
+  ]
+  
