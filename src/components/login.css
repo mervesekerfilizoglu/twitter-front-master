@@ -1,6 +1,6 @@
 /* Global dark background */
 body {
-    background-color: #000000;
+    background-color: blue;
     font-family: Arial, sans-serif;
     color: #e0e0e0;
     margin: 0;
@@ -9,13 +9,13 @@ body {
 
 /* Form container */
 .form {
-    background-color: #1e1e1e;
+    background-color: #1e1e1e54;
     width: 40%;
     min-width: 300px;
     height: auto;
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.342);
     display: flex;
     flex-direction: column;
     align-items: stretch;
